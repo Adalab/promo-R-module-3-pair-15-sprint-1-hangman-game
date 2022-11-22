@@ -1,6 +1,15 @@
 import "../styles/main.scss";
+import {useState} from 'react';
+
+
+
 
 function App() {
+  let [numberOfErrors, setNumberOfErrors] = useState(0);
+  const handleButton = (ev) => {
+    setNumberOfErrors (++numberOfErrors)
+    console.log(numberOfErrors);
+  }
   return (
     <div className="App">
       <div className="page">
@@ -23,6 +32,7 @@ function App() {
                 <li className="letter">e</li>
                 <li className="letter">r</li>
               </ul>
+              <button onClick={handleButton} > Incrementar </button>
             </div>
             <div className="error">
               <h2 className="title">Letras falladas:</h2>
@@ -48,7 +58,7 @@ function App() {
               />
             </form>
           </section>
-          <section className="dummy error-5">
+          <section className={`dummy error-${numberOfErrors}`}>
             <span className="error-13 eye"></span>
             <span className="error-12 eye"></span>
             <span className="error-11 line"></span>
