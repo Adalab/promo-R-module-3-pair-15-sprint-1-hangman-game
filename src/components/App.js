@@ -1,15 +1,16 @@
 import "../styles/main.scss";
-import {useState} from 'react';
-
-
-
+import { useState } from "react";
 
 function App() {
-  let [numberOfErrors, setNumberOfErrors] = useState(0);
+  const [numberOfErrors, setNumberOfErrors] = useState(0);
+  const [lastLetter, setLastLetter] = useState("");
   const handleButton = (ev) => {
-    setNumberOfErrors (++numberOfErrors)
+    setNumberOfErrors(numberOfErrors + 1);
     console.log(numberOfErrors);
-  }
+  };
+
+  const handleInputLastLetter = (ev) => {};
+
   return (
     <div className="App">
       <div className="page">
@@ -32,7 +33,7 @@ function App() {
                 <li className="letter">e</li>
                 <li className="letter">r</li>
               </ul>
-              <button onClick={handleButton} > Incrementar </button>
+              <button onClick={handleButton}> Incrementar </button>
             </div>
             <div className="error">
               <h2 className="title">Letras falladas:</h2>
@@ -55,6 +56,7 @@ function App() {
                 type="text"
                 name="last-letter"
                 id="last-letter"
+                onInput={handleInputLastLetter}
               />
             </form>
           </section>
