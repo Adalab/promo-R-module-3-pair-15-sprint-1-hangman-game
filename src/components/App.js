@@ -3,13 +3,22 @@ import { useState } from "react";
 
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
-  const [lastLetter, setLastLetter] = useState("");
+  const [lastLetter, setLastLetter] = useState([]);
   const handleButton = (ev) => {
     setNumberOfErrors(numberOfErrors + 1);
     console.log(numberOfErrors);
   };
 
-  const handleInputLastLetter = (ev) => {};
+  const handleInputLastLetter = (ev) => {
+    const regularExpresion = /[a-zA-ZáÁéÉíÍóÓúÚüÜ´]/;
+    //regularExpresion sirve para determinar caracteres permitidos
+    //test compara rE con el target y nos devuelve true or false
+    if (regularExpresion.test(ev.target.value)) {
+      setLastLetter(ev.target.value); 
+    } else {
+      setLastLetter("");
+    }
+  };
 
   return (
     <div className="App">
@@ -57,6 +66,7 @@ function App() {
                 name="last-letter"
                 id="last-letter"
                 onInput={handleInputLastLetter}
+                value={lastLetter}
               />
             </form>
           </section>
