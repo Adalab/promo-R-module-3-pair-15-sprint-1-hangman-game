@@ -4,6 +4,9 @@ import { useState } from "react";
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState([]);
+  const [word, setWord] = useState("pepino");
+  const [userLetters, setUserLetters] = useState([]);
+
   const handleButton = (ev) => {
     setNumberOfErrors(numberOfErrors + 1);
     console.log(numberOfErrors);
@@ -14,10 +17,21 @@ function App() {
     //regularExpresion sirve para determinar caracteres permitidos
     //test compara rE con el target y nos devuelve true or false
     if (regularExpresion.test(ev.target.value)) {
-      setLastLetter(ev.target.value); 
+      setLastLetter(ev.target.value);
+      setUserLetters([...userLetters, ev.target.value]);
+      //permite ir guardando las letras en el array sin machacar a las anteriores
     } else {
       setLastLetter("");
     }
+  };
+
+  const renderSolutionLetters = () => {
+    const wordLetters = word.split("");
+    //dividimos la palabra en cada una de sus letras
+    return wordLetters.map((wordLetter) => {
+      return <li class="letter"></li>;
+      //por cada letra crea un li
+    });
   };
 
   return (
@@ -30,18 +44,7 @@ function App() {
           <section>
             <div className="solution">
               <h2 className="title">Solución:</h2>
-              <ul className="letters">
-                <li className="letter">k</li>
-                <li className="letter">a</li>
-                <li className="letter"></li>
-                <li className="letter">a</li>
-                <li className="letter">k</li>
-                <li className="letter">r</li>
-                <li className="letter"></li>
-                <li className="letter">k</li>
-                <li className="letter">e</li>
-                <li className="letter">r</li>
-              </ul>
+              <ul className="letters">{renderSolutionLetters()}</ul>
               <button onClick={handleButton}> Incrementar </button>
             </div>
             <div className="error">
